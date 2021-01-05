@@ -14,6 +14,6 @@ jobs:
     - name: Install dependencies
       run: pip install flake8 lintly
     - name: Lint with flake8
-      run: flake8 $((git fetch origin master:master) && (git diff --name-only master)) | lintly --commit-sha=${{ github.event.pull_request.head.sha }}
+      run: flake8 $((git fetch origin master:master) && (git diff --name-only master | grep -E '\.py$')) | lintly --commit-sha=${{ github.event.pull_request.head.sha }}
       env:
         LINTLY_API_KEY: ${{ secrets.GITHUB_TOKEN }}
